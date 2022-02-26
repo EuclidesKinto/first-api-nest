@@ -28,8 +28,9 @@ export class CoursesService {
     return course;
   }
 
-  cerate(createCourseDto: any) {
-    return this.courses.push(createCourseDto);
+  create(createCourseDto: any) {
+    this.courses.push(createCourseDto);
+    return createCourseDto;
   }
 
   update(id: string, updateCourseDto: any) {
