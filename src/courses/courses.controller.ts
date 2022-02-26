@@ -3,11 +3,9 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
   Param,
   Patch,
   Post,
-  Res,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 
@@ -15,28 +13,27 @@ import { CoursesService } from './courses.service';
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
   @Get()
-  getAll(@Res() response): string {
-    return response.status(200).send('products list');
+  getAll(): any {
+    return this.coursesService.findAll();
   }
 
-  @Get(':slug')
-  getOne(@Param('slug') slug: string) {
-    return `product with ${slug}`;
+  @Get(':id')
+  getOne(@Param('id') id: string) {
+    return this.coursesService.finfOne(id);
   }
 
   @Post()
-  @HttpCode(204)
   create(@Body() body: any) {
-    return body;
+    return this.coursesService.cerate(body);
   }
 
-  @Patch(':slug')
-  update(@Param('slug') slug: string, @Body() body) {
-    return `Update product with slug: ${slug}`;
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body) {
+    return this.coursesService.update(id, body);
   }
 
-  @Delete(':slug')
-  remove(@Param('slug') slug: string) {
-    return `Remove product with slug: ${slug}`;
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.coursesService.remove(id);
   }
 }
