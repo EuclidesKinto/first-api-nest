@@ -14,4 +14,29 @@ export class CoursesService {
   findAll() {
     return this.courses;
   }
+
+  finfOne(id: string) {
+    return this.courses.find((course: Course) => course.id === Number(id));
+  }
+
+  cerate(createCourseDto: any) {
+    return this.courses.push(createCourseDto);
+  }
+
+  update(id: string, updateCourseDto: any) {
+    const indexCourse = this.courses.findIndex(
+      (course: Course) => course.id === Number(id),
+    );
+    return (this.courses[indexCourse] = updateCourseDto);
+  }
+
+  remove(id: string) {
+    const indexCourse = this.courses.findIndex(
+      (course: Course) => course.id === Number(id),
+    );
+
+    if (indexCourse >= 0) {
+      return this.courses.splice(indexCourse, 1);
+    }
+  }
 }
